@@ -11,6 +11,7 @@
  
     <div class="bg-white rounded-xl shadow p-6 mb-6">
         <h1 class="text-xl font-bold mb-4">Kirim Pesan Anonim</h1>
+        <h2 class="text-lg font-semibold mb-3">Pesan Masuk ({{ $messages->count() }})</h2>
         <form action="{{ route('messages.store') }}" method="POST">
             @csrf
             <textarea
@@ -21,7 +22,7 @@
             @error('content')
                 <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
             @enderror
-            <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-lg mt-2">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mt-2">
                 Kirim
             </button>
         </form>
@@ -34,7 +35,9 @@
             <div class="bg-white rounded-lg shadow p-4">
     <p>{{ $message->content }}</p>
     <div class="flex justify-between items-center mt-2">
-        <span class="text-xs text-gray-400">{{ $message->created_at->diffForHumans() }}</span>
+    <span class="text-xs text-gray-400">{{ $message->created_at->diffForHumans() }}</span>
+    <div class="flex gap-3">
+        <a href="{{ route('messages.edit', $message) }}" class="text-xs text-blue-500 hover:text-blue-600">Edit</a>
         <form action="{{ route('messages.destroy', $message) }}" method="POST"
               onsubmit="return confirm('Hapus pesan ini?')">
             @csrf
@@ -42,6 +45,7 @@
             <button type="submit" class="text-xs text-red-400 hover:text-red-600">Hapus</button>
         </form>
     </div>
+</div>
 </div>
         @empty
             <p class="text-gray-400 text-sm">Belum ada pesan.</p>

@@ -9,7 +9,6 @@ class MessageController extends Controller
 {
     public function index()
     {
-        // Ambil semua pesan, terbaru di atas.
         $messages = Message::latest()->get();
  
         return view('home', ['messages' => $messages]);
@@ -17,7 +16,6 @@ class MessageController extends Controller
  
     public function store(Request $request)
     {
-        // Validasi: pesan wajib diisi, maksimal 500 karakter.
         $validated = $request->validate([
             'content' => 'required|string|max:500',
         ]);
@@ -27,16 +25,32 @@ class MessageController extends Controller
         return redirect()->route('messages.index')->with('success', 'Pesan berhasil dikirim!');
     }
  
+    public function destroy(Message $message)
+    {
+        $message->delete();
+ 
+        return redirect()->route('messages.index')->with('success', 'Pesan dihapus.');
+    }
+ 
     public function about()
     {
         return view('about');
     }
 
-    public function destroy(Message $message)
+    public function edit(Message $message)
 {
-    $message->delete();
+    return view('edit', ['message' => $message]);
+}
  
-    return redirect()->route('messages.index')->with('success', 'Pesan dihapus.');
+public function update(Request $request, Message $message)
+{
+    $validated = $request->validate([
+        'content' => 'required|string|max:500',
+    ]);
+ 
+    $message->update($validated);
+ 
+    return redirect()->route('messages.index')->with('success', 'Pesan diperbarui.');
 }
 
 }

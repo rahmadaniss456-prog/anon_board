@@ -56,3 +56,29 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Anon Board
+ 
+Aplikasi papan pesan anonim sederhana. Pengunjung dapat mengirim pesan tanpa identitas, dan semua pesan tampil dalam satu daftar.
+ 
+## Teknologi
+- Laravel 12
+- MySQL
+- Blade
+- TailwindCSS (CDN)
+ 
+## Fitur
+- Kirim pesan anonim (Create)
+- Lihat daftar pesan (Read)
+- Ubah pesan (Update)
+- Hapus pesan (Delete)
+ 
+## Cara Menjalankan
+1. Clone repository ini
+2. Jalankan composer install
+3. Salin .env.example menjadi .env, lalu jalankan php artisan key:generate
+4. Buat database anon_board, lalu jalankan php artisan migrate
+5. Jalankan php artisan serve, buka http://127.0.0.1:8000
+ 
+Dibuat pada Skill Up Class HMPS-TI STMIK Widya Utama.
+
